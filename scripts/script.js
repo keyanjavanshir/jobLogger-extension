@@ -1,5 +1,5 @@
 // JOB ARRAY TO RENDER
-let companyList = []
+let companyList = [];
 
 // IDs from HTML
 const inputForm = document.getElementById("input-form")
@@ -7,6 +7,7 @@ const addSiteBtn = document.getElementById("btn-site")
 const addTabBtn = document.getElementById("btn-tab")
 const deleteBtn = document.getElementById("btn-delete")
 const logSites = document.getElementById("log")
+const printBtn = document.getElementById("btn-print")
 
 // Accessing localStorage
 const companiesFromLocalStorage = JSON.parse( localStorage.getItem("myCompanies") )
@@ -15,6 +16,7 @@ const companiesFromLocalStorage = JSON.parse( localStorage.getItem("myCompanies"
 if (companiesFromLocalStorage) {
     companyList = companiesFromLocalStorage
     render(companyList)
+    console.table(companyList)
 }
 
 
@@ -57,4 +59,31 @@ addSiteBtn.addEventListener("click", function() {
         localStorage.setItem("myCompanies", JSON.stringify(companyList) )
         render(companyList)
     }
+})
+
+
+printBtn.addEventListener("click", (e) => {
+    const titleKeys = Object.keys(companyList[0])
+    const refinedData = []
+    refinedData.push(titleKeys)
+
+    companyList.forEach(item => {
+        refinedData.push(Object.values(item))
+    })
+
+    let csvContent = "";
+
+    refinedData.forEach(row => {
+        csvContent += row.join('') +'\n'
+    })
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8,'})
+    const objUrl = URL.createObjectURL(blob)
+
+    const link = document.createElement('a')
+    link.setAttribute('href', objUrl)
+    link.setAttribute('download', 'File.csv')
+    link.textContent = "Click to download"
+
+    document.querySelector('body').append(link)
 })
