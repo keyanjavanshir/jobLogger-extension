@@ -63,12 +63,11 @@ addSiteBtn.addEventListener("click", function() {
 
 
 printBtn.addEventListener("click", (e) => {
-    const titleKeys = Object.keys(companyList[0])
     const refinedData = []
-    refinedData.push(titleKeys)
 
     companyList.forEach(item => {
         refinedData.push(Object.values(item))
+        console.log(Object.values(companyList))
     })
 
     let csvContent = "";
