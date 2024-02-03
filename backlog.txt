@@ -1,0 +1,12 @@
+1. Add website button
+2. Add tab button 
+3. Delete button --> Feedback box -> sure you want to delete?
+4. Render function?
+5. JSON.stringify -> when sending data to client
+6. JSON.pase -> when getting data from client
+7. localStorage (setItem) -> makes data persist even when closing tab
+8. localStorage (getItem) -> get Items and render 
+9. add items to localStorage without overriding last element
+10. error handling
+11. css
+12. get data from tab function
