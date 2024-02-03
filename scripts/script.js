@@ -49,8 +49,12 @@ deleteBtn.addEventListener("dblclick", function() {
 
 
 addSiteBtn.addEventListener("click", function() {
-    companyList.push(inputForm.value)
-    inputForm.value = ""
-    localStorage.setItem("myCompanies", JSON.stringify(companyList) )
-    render(companyList)
+    if(inputForm.value === "" || inputForm.value === "undefined") {
+        console.error("Please input a valid URL.")
+    } else {
+        companyList.push(inputForm.value)
+        inputForm.value = ""
+        localStorage.setItem("myCompanies", JSON.stringify(companyList) )
+        render(companyList)
+    }
 })
