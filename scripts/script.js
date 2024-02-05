@@ -13,6 +13,9 @@ const printBtn = document.getElementById("btn-print")
 const companiesFromLocalStorage = JSON.parse( localStorage.getItem("myCompanies") )
 
 
+let blobCounter = 0;
+
+
 if (companiesFromLocalStorage) {
     companyList = companiesFromLocalStorage
     render(companyList)
@@ -61,8 +64,21 @@ addSiteBtn.addEventListener("click", function() {
     }
 })
 
-
 printBtn.addEventListener("click", (e) => {
+
+    if(companyList === null || companyList.length === 0) {
+        console.log("No list available");
+    } else if(blobCounter > 0) {
+        printBtn.removeEventListener("click", (e) => {false});
+    } else {
+        addBlob()
+        blobCounter++;
+    }
+
+})
+
+
+function addBlob() {
     const refinedData = []
 
     companyList.forEach(item => {
@@ -85,4 +101,4 @@ printBtn.addEventListener("click", (e) => {
     link.textContent = "Click to download"
 
     document.querySelector('body').append(link)
-})
+}
